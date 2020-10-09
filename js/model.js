@@ -21,8 +21,14 @@ model.register = ({firstName, lastName, email, password, confirmedPassword}) => 
 
 model.login = ({email, password}) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(()=>{
-        alert('login successful!')
+    .then((res)=>{
+        if(!res.user.emailVerified){
+            alert('please verify email!')
+        }
+        else{
+            alert('login successful!')
+            view.setActiveScreen('welcomePage')
+        }
     })
     .catch((error)=>{
         // Handle Errors here.

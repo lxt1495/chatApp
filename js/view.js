@@ -1,6 +1,9 @@
 const view = {}
 view.setActiveScreen = (screenName)=>{
     switch(screenName){
+        case 'welcomePage':
+            document.getElementById("app").innerHTML = component.welcomePage
+            break
         case 'registerPage':
             document.getElementById("app").innerHTML = component.registerPage
             redirectLogin = document.getElementById('redirect-login')

@@ -60,3 +60,5 @@ component.loginPage =
             </form>
         </div>
         </div>`
+
+component.welcomePage = ""
