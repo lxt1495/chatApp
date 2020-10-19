@@ -49,22 +49,18 @@ view.setActiveScreen = (screenName)=>{
             sendMessageForm.addEventListener('submit', (e)=>{
                 e.preventDefault();
                 const message = sendMessageForm.message.value
-                console.log(message)
-                const messageSent = {
+                const messageSend = {
                     owner: model.currentUser.email,
-                    content: message
-                }
-                const messageBot = {
-                    owner: 'bot',
-                    content: message
+                    content: message,
+                    createdAt: new Date().toISOString()
                 }
                 if(message.trim()!==''){
-                    view.addMessage(messageSent)
-                    view.addMessage(messageBot)
+                    model.addMessage(messageSend)
                     sendMessageForm.message.value = ""
-    
                 }
             })
+            model.getConversations()
+            model.listenConversationChange()
             break
     }
 }
@@ -91,4 +87,10 @@ view.addMessage = (message) => {
         <div class="message-content">${message.content}</div>`
     }
     document.querySelector('.list-message').appendChild(messageWrapper)
+}
+
+view.showCurrentConversation = () => {
+    document.querySelector('.list-message').innerHTML=''
+    document.querySelector('.conversation-title').textContent = model.currentConversation.title
+    model.currentConversation.messages.forEach(view.addMessage)
 }
