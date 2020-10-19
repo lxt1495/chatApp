@@ -1,5 +1,7 @@
 const model = {}
 
+model.currentUser = {}
+
 model.register = ({firstName, lastName, email, password, confirmedPassword}) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user)=>{
@@ -27,7 +29,7 @@ model.login = ({email, password}) => {
         }
         else{
             alert('login successful!')
-            view.setActiveScreen('welcomePage')
+            // view.setActiveScreen('welcomePage')
         }
     })
     .catch((error)=>{

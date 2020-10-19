@@ -61,4 +61,19 @@ component.loginPage =
         </div>
         </div>`
 
-component.welcomePage = ""
+component.welcomePage = "WelocomePage"
+
+component.chatPage = 
+        `<div class="chat-container">
+        <div class="header">MinX Chat</div>
+        <div class="main">
+            <div class="conversation-detail">
+                <div class="conversation-title">First Conversation</div>
+                <div class="list-message"></div>
+                <form id="send-message-form">
+                    <input type="text" placeholder="Type a message" name="message">
+                    <button class="btn">Send</button>
+                </form>
+            </div>
+        </div>
+        </div>`

@@ -5,29 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/chat.css">
 </head>
 <body>
-    <div class="register-container">
-        <div class="background-img"></div>
-        <div class="form-wrapper">
-            <div class="register-header">MinX Chat</div>
-            <form id="register-form">
-                <div class="input-wrapper">
-                    <input type="email" name="email" placeholder="Email"/>
-                    <div id="email-error" class="err"></div>
-                </div>
-                <div class="input-wrapper">
-                    <input type="password" name="password" placeholder="Password"/>
-                    <div id="password-error" class="err"></div>
-                </div>
-                <div class="register-form-action">
-                    <div>
-                        Don't have an account? <span id="redirect-register" class="cursor-pointer">Register</span>
+    <div class="chat-container">
+        <div class="header">MinX Chat</div>
+        <div class="main">
+            <div class="conversation-detail">
+                <div class="conversation-title">First Conversation</div>
+                <div class="list-message">
+                    <div class="message message-mine">
+                        <div class="message-content">Hello</div>
                     </div>
-                    <button class="btn" type="submit">Login</button>
-                </div>    
-            </form>
+                    <div class="message message-other">
+                        <div class="owner">Other</div>
+                        <div class="message-content">Good Bye</div>
+                    </div>
+                </div>
+                <form id="send-message-form">
+                    <input type="text" placeholder="Type a message" name="message">
+                    <button class="btn">Send</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
