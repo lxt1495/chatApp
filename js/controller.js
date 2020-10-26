@@ -57,3 +57,23 @@ controller.login = ({email, password}) => {
     model.login(dataLogin)
 }
 
+controller.createConversation = ({title, email})=>{
+    view.clearErrorMessages()
+    pass=true
+    if(title === ''){
+        view.setErrorMessage('conversation-title-error', 'Please input title')
+        pass=false
+    }
+    if(email === '' || !validateEmail(email)){
+        view.setErrorMessage('conversation-email-error', 'Invalid email')
+        pass=false
+    }
+    if(!pass) return
+    model.addConversation({title,email})
+}
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+

@@ -67,6 +67,13 @@ component.chatPage =
         `<div class="chat-container">
         <div class="header">MinX Chat</div>
         <div class="main">
+            <div class="aside-left">
+                <div class="create-conversation">
+                    <button class="btn cursor-pointer">+ New Conversation</button>
+                </div>
+                <div class="list-conversation">
+                </div>    
+            </div>
             <div class="conversation-detail">
                 <div class="conversation-title">First Conversation</div>
                 <div class="list-message"></div>
@@ -77,3 +84,23 @@ component.chatPage =
             </div>
         </div>
         </div>`
+
+component.createConverationScreen = 
+    `<div class="create-conversation-container">
+    <div class="header">MinX Chat</div>
+    <form id="create-conversation-form" style="padding: 40px 20%">
+        <h3 class="mb-1">Create a new conversation</h3>
+        <div class="input-wrapper">
+            <input type="text" name="title" placeholder="Conversation Name" />
+            <div id="conversation-title-error" class="err"></div>
+        </div>
+        <div class="input-wrapper">
+            <input type="text" name="email" placeholder="Friend Email" />
+            <div id="conversation-email-error" class="err"></div>
+        </div>
+        <div class="action">
+            <button type="submit" class="btn">Save</button>
+            <button id="return-chat" type="button" class="btn btn-light">Cancel</button>
+        </div>
+    </form>
+    </div>`

@@ -54,11 +54,12 @@ model.signOut = () => {
 }
 
 model.addMessage = (message) => {
-    const docId='9FuDIkFq4G61IQUhtVcy'
+    const docId = model.currentConversation.id
     const dataToUpdate = {
         messages: firebase.firestore.FieldValue.arrayUnion(message)
     }
     firebase.firestore().collection('Conversations').doc(docId).update(dataToUpdate)
+    view.scrollToEndElm()
 }
 
 model.getConversations = async () => {
@@ -67,6 +68,7 @@ model.getConversations = async () => {
     if(model.conversations.length>0){
         model.currentConversation = model.conversations[0]
         view.showCurrentConversation()
+        view.showListConversation()
     }
 }
 
@@ -82,16 +84,31 @@ model.listenConversationChange = async () => {
             docChanges.forEach(change=>{
                 if(change.type === 'modified'){
                    const dataChange = getDataFromDoc(change.doc)
-                   model.conversations.forEach(conversation=>{
-                       if(conversation.id===dataChange.id) conversation = dataChange
-                   })
+                    for(i=0; i<model.conversations.length; i++){
+                        if(model.conversations[i].id===dataChange.id) model.conversations[i] = dataChange
+                    }
                    if(dataChange.id === model.currentConversation.id){
                        model.currentConversation = dataChange
                     //    view.showCurrentConversation()
                     view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length-1])
                    }
                 }
+                else if(change.type === 'added'){
+                    const dataChange = getDataFromDoc(change.doc)
+                    model.conversations.push(dataChange)
+                    view.addConversation(dataChange)
+                }
             })
         })
+}
 
+model.addConversation = ({title, email}) => {
+    const dataToAdd = {
+        title,
+        createdAt: new Date().toISOString(),
+        message: [],
+        users: [model.currentUser.email, email]
+    }
+    firebase.firestore().collection('Conversations').add(dataToAdd)
+    view.setActiveScreen('chatPage', true)
 }
